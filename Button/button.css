@@ -1,0 +1,75 @@
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+	position: relative;
+	font-family: Helvetica, sans-serif;
+}
+body {
+	background: purple;
+}
+div.wrapper {
+	display: inline-flex;
+}
+button.btn {
+	/*display: none;*/
+	visibility: none;
+	border: none;
+	outline: none;
+	user-select: none;
+	position: relative;
+	height: 60px;
+	width: 120px;
+	background: url('bg-ab1.png');
+	background-clip: border-box;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+button.btn-abs {
+	font-size: 20px;
+	margin: 5px;
+	overflow: hidden;
+	transition: all 0.2s ease-out 0.2s;
+}
+button.btn-abs:hover {
+	color: rgba(0,0,0,0);
+}
+
+.btn-abs:before,
+.btn-abs:after {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	content: "";
+	font-weight: bolder;
+}
+.btn-abs:after {
+	background: transparent;
+	border: 3px solid #f1f1f1;
+	color: #000;
+	padding-top: 5px;
+	content: attr(data-over);
+	transition: all 0.2s ease-out 0.2s;
+}
+.btn-abs:hover:after {
+	color: transparent;
+}
+.btn-abs:before {
+	color: #fff;
+	text-shadow: 0 0 5px rgba(0,0,0,0.5);
+	padding-top: 100px;
+	transition: border-top-width 0.2s ease-out 0.2s, padding-top 0.2s ease-out 0.2s, border-left-width 0.2s ease-out 0.2s, border-bottom-width 0.2s ease-out 0.2s, border-right-width 0.2s ease-out 0.2s;
+	border-top: 60px solid #f1f1f1;
+	border-left: 60px solid #f1f1f1;
+	border-right: 60px solid #f1f1f1;
+}
+.btn-abs:hover:before {
+	padding-top: 0;
+	border-top: 0 solid #f1f1f1;
+	border-left: 0 solid #f1f1f1;
+	border-right: 0 solid #f1f1f1;
+	content: attr(data-under);
+	padding-top: 20px;
+}
