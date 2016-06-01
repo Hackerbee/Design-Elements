@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dynamic Image background Demo</title>
+	<link rel="stylesheet" type="text/css" href="DIB.css">
+</head>
+<body onmousemove="mousePosParent()">
+	<div class="dynback-wrapper">
+		<div class="dynback">
+			&nbsp;
+		</div>
+	</div>
+	<div align="center" style="position: fixed;bottom: 0;right: 0;display: inline-flex; color: #fff;">
+		<div>Nodes<br>
+			Parent : <input type="text" id="parent"><br>
+			Target : <input type="text" id="target">
+		</div>
+		<div>From parent<br>
+			&nbsp;Left : <input type="text" id="pposx"><br>
+			&nbsp;Top : <input type="text" id="pposy">
+		</div>
+		<div>From document<br>
+			&nbsp;Left : <input type="text" id="posx"><br>
+			&nbsp;Top : <input type="text" id="posy">
+		</div>
+	</div>
+<script> window.jQuery || document.write('<script src="jquery.min.js"><\/script>') </script>
+<script type="text/javascript">
+	function mouseTarget(e) {
+		var targ;
+		if (e.target) { targ = e.target; }
+		else if (e.srcElement) { targ = e.srcElement; }
+		if (targ.nodeType == 3) { targ = targ.parentNode; }
+		return {
+			target : targ,
+			parent : targ.parentNode
+		}
+	}
+	function mousePosDoc(e) {
+		var posx = 0;
+		var posy = 0;
+		if (e.pageX || e.pageY) {
+			posx = e.pageX;
+			posy = e.pageY;
+		} else if (e.clientX || e.clientY) {
+			posy = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+			posy = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+		}
+		return {
+			x : posx,
+			y : posy
+		}
+	}
+	function targetPos(obj) {
+		var posx = 0;
+		var posy = 0;
+		if (obj.offsetParent) {
+			do {
+				posx += obj.offsetLeft;
+				posy += obj.offsetTop;
+			} while (obj = obj.offsetParent);
+		}
+		return {
+			x : posx,
+			y : posy
+		}
+	}
+	function mousePosParent(e) {
+		if (!e) { var e = window.event; }
+		var posDoc = mousePosDoc(e);
+		var targ = mouseTarget(e);
+		var targPos = targetPos(targ.target);
+		var posx = posDoc.x - targPos.x;
+		var posy = posDoc.y - targPos.y;
+		$('#parent').val(targ.parent.nodeName +"#"+ targ.parent.id);
+		$('#target').val(targ.target.nodeName +"#"+ targ.target.id);
+		$('#pposx').val(posx);
+		$('#pposy').val(posy);
+		$('#posx').val(posDoc.x);
+		$('#posy').val(posDoc.y);
+		return {
+			x : posx,
+			y : posy
+		}
+	}
+</script>
+</body>
+</html>
