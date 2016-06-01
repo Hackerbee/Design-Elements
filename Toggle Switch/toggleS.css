@@ -3,6 +3,11 @@
 *:before {
 	box-sizing: border-box;
 }
+section.inverse {
+	margin: 20px;
+	padding: 20px;
+	background-color: black;
+}
 body {
 	/*background-color: purple;*/
 }
@@ -27,7 +32,7 @@ body {
 input.toggleS {
 	display: none;
 	visibility: hidden;
-	margin-right: -9999px;
+	/*margin-right: -9999px;*/
 	position: absolute;
 }
 input.toggleS + label {
@@ -36,6 +41,7 @@ input.toggleS + label {
 	cursor: pointer;
 	outline: none;
 	user-select: none;
+	box-shadow: 0 0 5px rgba(0,0,0,0.15);
 }
 
 /* --------------------------------
@@ -84,6 +90,57 @@ input.toggleS-round:checked + label:after{
 	box-shadow: inset 0 0 5px #8ce196;
 }
 input.toggleS-round:checked + label {
+	background-color: transparent;
+	box-shadow: 0 0 0 transparent;
+}
+
+/* --------------------------------
+	Round off toggle switch 
+-----------------------------------*/
+
+input.toggleS-round-off + label {
+	padding: 2px;
+	position: absolute;
+	width: 120px;
+	height: 60px;
+	background-color: #dddddd;
+	border-radius: 60px;
+}
+input.toggleS-round-off + label:after,
+input.toggleS-round-off + label:before {
+	display: block;
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	right: 2px;
+	bottom: 2px;
+	content: "";
+}
+input.toggleS-round-off + label:before {
+	background-color: #f1f1f1;
+	border-radius: 60px;
+	transition: background 0.4s;
+}
+input.toggleS-round-off + label:after {
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: 60px;
+	border: 10px solid #ddd;
+	background-color: #fff;
+	border-radius: 100%;
+	transition: margin 0.4s;
+	box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+input.toggleS-round-off:checked + label:before {
+	background-color: #8ce196;
+	box-shadow: 0 0 5px #8ce196;
+}
+input.toggleS-round-off:checked + label:after {
+	margin-left: 60px;
+	box-shadow: inset 0 0 5px #8ce196;
+}
+input.toggleS-round-off:checked + label {
 	background-color: transparent;
 	box-shadow: 0 0 0 transparent;
 }
