@@ -1,0 +1,89 @@
+*,
+*:after,
+*:before {
+	box-sizing: border-box;
+}
+body {
+	/*background-color: purple;*/
+}
+
+/* --------------------------------
+	Toogle switch common
+-----------------------------------*/
+
+.switch {
+	display: inline-flex;
+	position: relative;
+	width: 120px;
+	height: 60px;
+	margin: 10px;
+	color: transparent;
+}
+.switch > label {
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
+}
+input.toggleS {
+	display: none;
+	visibility: hidden;
+	margin-right: -9999px;
+	position: absolute;
+}
+input.toggleS + label {
+	display: block;
+	position: relative;
+	cursor: pointer;
+	outline: none;
+	user-select: none;
+}
+
+/* --------------------------------
+	Round toggle switch
+-----------------------------------*/
+
+input.toggleS-round + label {
+	padding: 2px;
+	position: absolute;
+	width: 120px;
+	height: 60px;
+	background-color: #dddddd;
+	border-radius: 60px;
+}
+input.toggleS-round + label:after,
+input.toggleS-round + label:before {
+	display: block;
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	right: 2px;
+	bottom: 2px;
+	content: "";
+}
+input.toggleS-round + label:before{
+	background-color: #f1f1f1;
+	border-radius: 60px;
+	transition: background 0.4s;
+}
+input.toggleS-round + label:after{
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: 60px;
+	background-color: #fff;
+	border-radius: 100%;
+	transition: margin 0.4s;
+	box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+input.toggleS-round:checked + label:before{
+	background-color: #8ce196;
+	box-shadow: 0 0 5px #8ce196;
+}
+input.toggleS-round:checked + label:after{
+	margin-left: 60px;
+	box-shadow: inset 0 0 5px #8ce196;
+}
+input.toggleS-round:checked + label {
+	background-color: transparent;
+	box-shadow: 0 0 0 transparent;
+}
