@@ -27,6 +27,7 @@
 <script> window.jQuery || document.write('<script src="jquery.min.js"><\/script>') </script>
 <script type="text/javascript">
 	function mouseTarget(e) {
+		if (!e) { var e = window.event; }
 		var targ;
 		if (e.target) { targ = e.target; }
 		else if (e.srcElement) { targ = e.srcElement; }
@@ -37,6 +38,7 @@
 		}
 	}
 	function mousePosDoc(e) {
+		if (!e) { var e = window.event; }
 		var posx = 0;
 		var posy = 0;
 		if (e.pageX || e.pageY) {
@@ -52,6 +54,7 @@
 		}
 	}
 	function targetPos(obj) {
+		if (!e) { var e = window.event; }
 		var posx = 0;
 		var posy = 0;
 		if (obj.offsetParent) {
@@ -80,9 +83,27 @@
 		$('#posy').val(posDoc.y);
 		return {
 			x : posx,
-			y : posy
+			y : posy,
+			t : targ
 		}
 	}
+	$(document).ready(function () {
+		$('.dynback').on('mousemove',function(e) {
+			var shift = mousePosParent(e);
+			var h = shift.t.parent.offsetHeight;
+			var w = shift.t.parent.offsetWidth;
+			var x = 50-(shift.x-w/2)/30;
+			var y = 50+(shift.y-h/2)/30;
+			$(this).css({
+				'background-position' : x+'% '+y+'%'
+			});
+		});
+		$('.dynback').on('mouseout',function(e) {
+			$(this).css({
+				'background-position' : '50% 50%'
+			});
+		});
+	});
 </script>
 </body>
 </html>
